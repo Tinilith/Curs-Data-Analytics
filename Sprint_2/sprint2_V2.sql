@@ -58,6 +58,11 @@ FROM company
 WHERE id NOT IN (SELECT company_id
 	FROM transaction);
     
+##not in es menos efectivo que not exisits Mica me manda otra forma:
+
+    
+    
+    
 ###Nivell 2
 ##Exercici 2.1
 #En la teva empresa, es planteja un nou projecte per a llançar algunes campanyes publicitàries per a fer competència a la companyia Non Institute. 
@@ -136,4 +141,13 @@ FROM ( SELECT company_name, COUNT(*) as count_transactions
     GROUP BY company_name) as transactions_empresa
     ORDER BY num_transactions;
 
+### con SUBQUERY 
+SELECT c.company_name,
+    CASE
+        WHEN count(t.id) > 4 THEN 'Mayor que 4 ' 
+        ELSE 'Menor que 4'
+        END AS Cant_transac
+FROM transaction t, company c
+WHERE t.company_id = c.id
+GROUP BY c.company_name;
 

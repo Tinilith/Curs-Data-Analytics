@@ -474,7 +474,7 @@ CHANGE COLUMN email personal_email VARCHAR (150);
 #Assegura't d'incloure informació rellevant de totes dues taules i utilitza àlies per a canviar de nom columnes segons sigui necessari.
 #Mostra els resultats de la vista, ordena els resultats de manera descendent en funció de la variable ID de transaction.
 
-CREATE VIEW InformeTecnico AS
+CREATE VIEW InformeTecnico_v2 AS
 SELECT transaction.id AS 'ID de la transacció',
  user.name AS "Nom de l'usuari/ària", 
  user.surname AS 'Cognom de l"usuari/ària',
@@ -486,7 +486,7 @@ LEFT JOIN credit_card
 ON transaction.credit_card_id =credit_card.id
 LEFT JOIN user
 ON transaction.user_id = user.id
-ORDER BY transaction.id desc;
+;
 
 
 
