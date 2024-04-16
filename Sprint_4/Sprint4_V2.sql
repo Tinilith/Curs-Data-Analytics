@@ -265,14 +265,12 @@ JOIN products ON FIND_IN_SET(products.id, REPLACE(transactions.product_ids, ', '
 ##Exercici 1
 #Necessitem conèixer el nombre de vegades que s'ha venut cada producte.
 
-SELECT products.id, products.product_name, Count(transaction_id) as num_ventes
-FROM transactions LEFT JOIN transaction_products
-ON transaction_products.transaction_id = transactions.id
+SELECT products.product_name, Count(product_id) AS num_ventas
+FROM transaction_products
 LEFT JOIN products 
 ON transaction_products.product_id=products.id
-WHERE transactions.declined = 0
-GROUP BY products.id, product_name
-ORDER BY num_ventes desc
+GROUP BY product_name
+ORDER BY num_ventas desc
 ;
 
 
