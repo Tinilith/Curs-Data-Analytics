@@ -15,14 +15,17 @@ WHERE company_id IN (SELECT  id
 #Màrqueting està preparant alguns informes de tancaments de gestió, et demanen que els passis un llistat de les empreses que han realitzat transaccions 
 #per una suma superior a la mitjana de totes les transaccions.
 
-SELECT DISTINCT company_name 
+
+##CORRECCIÓN!
+SELECT DISTINCT company.*
 FROM transaction LEFT JOIN company
 ON transaction.company_id =company.id
 WHERE amount > (SELECT AVG(amount)
 FROM transaction)
 ORDER BY company_name;
 
-SELECT company_name
+##SUBQUERY CORREGIDA
+SELECT company.*
 FROM company
 WHERE id IN (SELECT DISTINCT company_id
 	FROM transaction
@@ -103,6 +106,20 @@ WHERE mitjana > (
 	SELECT AVG(amount) as mitjana_total
     FROM transaction);
     
+##CORRECCIÓN!!
+   
+   SELECT country, AVG(amount) AS mitjana
+FROM (
+    SELECT company.country, transaction.amount
+    FROM transaction , company 
+    WHERE transaction.company_id = company.id
+) AS transaccions_per_pais
+GROUP BY country
+HAVING AVG(amount) > (
+    SELECT AVG(amount) AS mitjana_general
+    FROM transaction
+);
+    
 ##Exercici 3.2
 #Necessitem optimitzar l'assignació dels recursos i dependrà de la capacitat operativa que es requereixi, per la qual cosa et demanen la 
 #informació sobre la quantitat de transaccions que realitzen les empreses, però el departament de recursos humans és exigent i vol un 
@@ -110,13 +127,13 @@ WHERE mitjana > (
 
 SELECT company_name, 
 	CASE
-    WHEN transactions_empresa > 4 THEN 'Més de 4 transaccions'
+    WHEN count_transactions > 4 THEN 'Més de 4 transaccions'
     ELSE 'Menys de 4 transaccions'
     END AS num_transactions
-FROM ( SELECT company_name, COUNT(*) as transactions_empresa
+FROM ( SELECT company_name, COUNT(*) as count_transactions
 	FROM transaction LEFT JOIN company
 	ON transaction.company_id = company.id
-    GROUP BY company_name) as te
+    GROUP BY company_name) as transactions_empresa
     ORDER BY num_transactions;
 
 
