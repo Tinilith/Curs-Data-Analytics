@@ -56,7 +56,7 @@ WHERE declined =0;
 ##- Exercici 4
 #Des de màrqueting també volen saber des de quants països es fan les compres.
 
-SELECT count(distinct country) as num_paisos
+SELECT COUNT(DISTINCT country) as num_paisos
 FROM company
 INNER JOIN transaction 
 ON company.id=transaction.company_id

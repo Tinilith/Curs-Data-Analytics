@@ -4,7 +4,6 @@
 #Descàrrega els arxius CSV, estudia'ls i dissenya una base de dades amb un esquema d'estrella que contingui, 
 #almenys 4 taules de les quals puguis realitzar les següents consultes:
 
-
 # En primer lloc creem la base de dades:
 
 CREATE DATABASE transactionsS4;
@@ -149,7 +148,6 @@ REFERENCES users (id);
 
 # En el cas de credit_cards tenim les dates en format dd/mm/yy. Canviem a format DATE i posteriorment canviem les dades:
 
-
 	
 UPDATE users
 SET birth_date = STR_TO_DATE(birth_date, '%b %d, %Y');
@@ -160,7 +158,6 @@ SET birth_date = STR_TO_DATE(birth_date, '%b %d, %Y');
 #Ara si podem posar el tipus de dada:
 ALTER TABLE users
 MODIFY COLUMN birth_date DATE ;
-
 
 
 #El mateix passa amb la taula credit_cards, les dades estan com mes/dia/any i per posar tipus de dada a DATE hem de pasahor a any/mes/dia:
@@ -179,10 +176,8 @@ WHERE price LIKE '%$%' ;
 ALTER TABLE products
 CHANGE COLUMN price price_usd DECIMAL(10,2); #tornem a definir el tipus de dada a "DECIMAL", he aprofitat de canviar el nom a price_usd per recordar que està en dollars.
 
-
 ## Exercici 1.1
 #Realitza una subconsulta que mostri tots els usuaris amb més de 30 transaccions utilitzant almenys 2 taules.
-
 
 SELECT users.name, users.surname
 FROM users
@@ -190,7 +185,6 @@ WHERE users.id IN (SELECT transactions.user_id
 	FROM transactions
     GROUP BY user_id
     HAVING count(*)  >30);
-    
     
     
 ##Exercici 1.2
@@ -228,10 +222,6 @@ WHERE Rank_Transaccion <= 3
 GROUP BY card_id;
 
 
-
-
-
-
 #Exercici 2.1
 #Quantes targetes estan actives?
 
@@ -242,9 +232,6 @@ WHERE Estado = 'Activa';
 
 ###Nivell 3
 #Crea una taula amb la qual puguem unir les dades del nou arxiu products.csv amb la base de dades creada, tenint en compte que des de transaction tens product_ids. Genera la següent consulta:
-
-
-
 
 
 CREATE TABLE transaction_products (

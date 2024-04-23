@@ -60,9 +60,7 @@ WHERE id NOT IN (SELECT company_id
     
 ##not in es menos efectivo que not exisits Mica me manda otra forma:
 
-    
-    
-    
+
 ###Nivell 2
 ##Exercici 2.1
 #En la teva empresa, es planteja un nou projecte per a llançar algunes campanyes publicitàries per a fer competència a la companyia Non Institute. 
