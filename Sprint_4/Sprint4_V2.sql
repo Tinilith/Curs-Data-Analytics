@@ -6,7 +6,8 @@
 
 # En primer lloc creem la base de dades:
 
-CREATE DATABASE transactionsS4;
+CREATE DATABASE transactionsV2;
+USE transactionsV2;
 
 # A continuació creem les taules:
 
@@ -48,7 +49,7 @@ card_id VARCHAR(20),
 business_id	 VARCHAR(20),
 timestamp DATETIME,
 amount DECIMAL (10,2),
-declined TINYINT(1),
+declined TINYINT,
 product_ids VARCHAR(50),
 user_id VARCHAR(20),
 lat FLOAT ,
